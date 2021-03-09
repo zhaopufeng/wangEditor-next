@@ -1,3 +1,3 @@
 export default function core() {
-  // TODO
+  console.log('hello core')
 }

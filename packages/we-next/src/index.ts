@@ -1,3 +1,3 @@
 export default function weNext() {
-  // TODO
+  console.log('hello we-next')
 }
