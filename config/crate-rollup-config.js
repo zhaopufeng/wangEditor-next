@@ -6,7 +6,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 
 export default function createRollupConfig(distDir, options) {
-  const { name = 'index', format, suffix = 'js' } = options
+  const { name = 'index', format, suffix = 'js', plugins = [] } = options
 
   return {
     input: path.resolve(__dirname, './src/index.ts'),
@@ -33,6 +33,7 @@ export default function createRollupConfig(distDir, options) {
         comments: 'none',
         extensions: ['.ts'],
       }),
+      ...plugins
     ],
   };
 }

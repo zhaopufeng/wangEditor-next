@@ -12,7 +12,7 @@
     }
   },
   "changelog": {
-    "repo": "TLabs/tlabs-creative",
+    "repo": "wangeditor-team/wangEditor",
     "labels": {
       "tag: new feature": ":rocket: New Feature",
       "tag: breaking change": ":boom: Breaking Change",

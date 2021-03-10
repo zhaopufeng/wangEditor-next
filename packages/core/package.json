@@ -11,6 +11,10 @@
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
+  "browser": {
+    "./dist/index.js": "./dist/index.js",
+    "./dist/index.mjs": "./dist/index.mjs"
+  },
   "directories": {
     "lib": "dist",
     "test": "__tests__"

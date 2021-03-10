@@ -1,9 +1,10 @@
 import path from 'path';
+import { terser } from 'rollup-plugin-terser';
 import createRollupConfig from '../../config/crate-rollup-config';
 
 const distDir = path.resolve(__dirname, './dist');
 
 export default [
-  createRollupConfig(distDir, { format: 'umd' }),
+  createRollupConfig(distDir, { format: 'umd', plugins: [terser()] }),
   createRollupConfig(distDir, { name: 'index.module', format: 'es', suffix: 'mjs' }),
 ];
