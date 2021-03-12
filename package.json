@@ -4,7 +4,9 @@
   "scripts": {
     "test": "jest",
     "test-c": "jest --coverage",
-    "build": "lerna exec --parallel -- 'yarn build'"
+    "build": "lerna exec --parallel -- 'yarn build'",
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "publish": "lerna publish"
   },
   "workspaces": [
     "packages/*"
