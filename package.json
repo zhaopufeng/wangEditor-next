@@ -7,7 +7,7 @@
     "build": "lerna exec --parallel -- 'yarn build'",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "release": "lerna version",
-    "prerelease": "git pull && yarn build && lerna-changelog"
+    "prerelease": "git pull && yarn build"
   },
   "workspaces": [
     "packages/*"
