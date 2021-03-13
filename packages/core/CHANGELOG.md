@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.8](https://github.com/wangeditor-team/wangEditor-next/compare/@wangeditor-team/core@0.0.7...@wangeditor-team/core@0.0.8) (2021-03-13)
+
+
+### Bug Fixes
+
+* test publish ([42c9999](https://github.com/wangeditor-team/wangEditor-next/commit/42c9999113f64cbcecabc01c327b95e08369f906))
+
+
+
+
+
 ## [0.0.7](https://github.com/wangeditor-team/wangEditor-next/compare/@wangeditor-team/core@0.0.6...@wangeditor-team/core@0.0.7) (2021-03-13)
 
 
