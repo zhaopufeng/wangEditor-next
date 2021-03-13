@@ -13,7 +13,9 @@
       "tag-version-prefix": "v"
     },
     "version": {
-      "message": "chore(release): publish %s"
+      "message": "chore(release): publish %s",
+      "tag-version-prefix": "v",
+      "allowBranch": "master"
     }
   },
   "changelog": {
@@ -27,5 +29,6 @@
       "tag: internal": ":house: Internal"
     },
     "cacheDir": ".changelog"
-  }
+  },
+  "changelogPreset": "angular"
 }
