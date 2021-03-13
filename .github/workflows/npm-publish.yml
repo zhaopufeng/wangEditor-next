@@ -7,7 +7,7 @@ name: npm-publish
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - '@wangeditor-team/*'
 
 jobs:
   publish-npm:
