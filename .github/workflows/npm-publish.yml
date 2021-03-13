@@ -21,7 +21,7 @@ jobs:
       - run: yarn install
       - run: yarn test
       - run: yarn run build --if-present
-      - run: yarn publish packages/core
+      - run: npm publish packages/core --access=public
       - run: npm publish packages/we-next --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
