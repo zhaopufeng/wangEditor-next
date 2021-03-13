@@ -6,7 +6,7 @@
     "test-c": "jest --coverage",
     "build": "lerna exec --parallel -- 'yarn build'",
     "bootstrap": "lerna bootstrap --use-workspaces",
-    "release": "lerna publish",
+    "release": "lerna version",
     "prerelease": "git pull && yarn build && lerna-changelog"
   },
   "workspaces": [

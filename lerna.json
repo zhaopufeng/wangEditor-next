@@ -9,7 +9,11 @@
     "publish": {
       "ignoreChanges": ["ignored-file", "*.md"],
       "message": "chore(release): publish",
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "tag-version-prefix": "v"
+    },
+    "version": {
+      "message": "chore(release): publish %s"
     }
   },
   "changelog": {
