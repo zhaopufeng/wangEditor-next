@@ -1,6 +1,6 @@
 import path from 'path';
 import { terser } from 'rollup-plugin-terser';
-import createRollupConfig from '../../config/crate-rollup-config';
+import createRollupConfig from '../../config/create-rollup-config';
 
 const distDir = path.resolve(__dirname, './dist');
 
