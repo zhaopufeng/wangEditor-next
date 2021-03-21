@@ -6,7 +6,8 @@
  export interface IText {
     focus: boolean,
     height: number,
-    placeholder: string
+    placeholder: string,
+    zIndex: number
 }
 
 export default (function (): IText {
@@ -14,5 +15,6 @@ export default (function (): IText {
         focus: true,
         height: 300,
         placeholder: '请输入正文',
+        zIndex: 1
     }
 })()
