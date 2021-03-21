@@ -4,7 +4,7 @@
  */
 
 import $, { DomElement } from '../utils/dom-core'
-import Editor from './index'
+import Editor from '../index'
 
 class Command {
     public editor: Editor
@@ -49,8 +49,8 @@ class Command {
                 break
         }
 
-        // 修改菜单状态
-        editor.menus.changeActive()
+        // 修改菜单状态 - 事件名暂定
+        editor.emitter.emit('hook:menusIsActive')
 
         // 最后，恢复选取保证光标在原来的位置闪烁
         selection.saveRange()

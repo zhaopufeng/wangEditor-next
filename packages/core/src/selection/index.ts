@@ -2,10 +2,10 @@
  * @description selection range API
  * @author wangfupeng
  */
-import $, { DomElement } from './utils/dom-core'
-import { UA } from './utils/util'
-import Editor from './editor'
-import { EMPTY_P } from './utils/const'
+import $, { DomElement } from '../utils/dom-core'
+import { UA } from '../utils/util'
+import Editor from '../editor'
+import { EMPTY_P } from '../utils/const'
 
 class SelectionAndRange {
     public editor: Editor

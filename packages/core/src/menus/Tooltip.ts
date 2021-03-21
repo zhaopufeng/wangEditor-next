@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import $, { DomElement } from '../../utils/dom-core'
-import Editor from '../../editor/index'
+import $, { DomElement } from '../utils/dom-core'
+import Editor from '../editor/index'
 
 type PositionDataType = {
     top: number

@@ -9,9 +9,8 @@ import config, { WangEditorConfig } from '../config'
 import logger, { TLogger } from '../utils/logger'
 import SelectionAndRangeAPI from '../selection'
 import CommandAPI from '../command'
-import createEmitter, { Emitter } from '../emitter'
+import createEmitter, { Emitter } from '../utils/emitter'
 import createEditorElement from '../element'
-
 
 // 菜单
 import BtnMenu from '../menus/BtnMenu'
@@ -20,8 +19,7 @@ import DropListMenu from '../menus/DropListMenu'
 import Panel from '../menus/Panel'
 import PanelMenu from '../menus/PanelMenu'
 import Tooltip from '../menus/Tooltip'
-import initEvents from '../element/initEvent'
-
+import initEvents from '../emitter/initEvent'
 
 let EDITOR_ID = 1
 
@@ -123,8 +121,8 @@ class Editor {
      * 创建编辑器实例
      */
     public create(): void {
-        // 触发 create 生命周期
-        this.emitter.emit('hook:create')
+        // 触发 created 生命周期
+        this.emitter.emit('hook:created')
 
         // 初始化 DOM
         createEditorElement(this)
