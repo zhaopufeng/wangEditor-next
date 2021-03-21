@@ -20,6 +20,7 @@ import DropListMenu from '../menus/DropListMenu'
 import Panel from '../menus/Panel'
 import PanelMenu from '../menus/PanelMenu'
 import Tooltip from '../menus/Tooltip'
+import initEvents from '../element/initEvent'
 
 
 let EDITOR_ID = 1
@@ -136,9 +137,10 @@ class Editor {
         
 
         // 初始化选区，将光标定位到内容尾部
-        
+        initSelection(this)
 
-        // 绑定事件
+        // 事件初始化 
+        initEvents(this)
         
         // 触发 mounted 生命周期
         this.emitter.emit('hook:mounted')
