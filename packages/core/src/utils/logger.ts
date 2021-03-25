@@ -1,12 +1,11 @@
-
-
+/**
+ * @description 记录器
+ * @author tonghan
+ */
 
 type ConsoleKeys = keyof Console
-
 type Levels = { [key in ConsoleKeys]?: number }
-
 type LevelsKeys = keyof Levels
-
 
 /**
  * 记录器
@@ -36,7 +35,7 @@ class Logger {
     }
 
     /**
-     * 初始化 leves
+     * 初始化 levels
      */
     initLeves() {
         this.addLevel('error', 1000)
@@ -79,12 +78,16 @@ class Logger {
         // }
     }
 
-    // 获取
+    /**
+     * 获取 level
+     */
     get baseLevel() {
         return this.level
     }
 
-    // 设置
+    /**
+     * 设置 level
+     */
     set baseLevel(level: ConsoleKeys) {
         this.level = level
     }

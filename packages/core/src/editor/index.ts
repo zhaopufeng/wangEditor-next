@@ -121,7 +121,7 @@ class Editor {
      */
     public create(): void {
         // 触发 created 生命周期
-        this.emitter.emit('hook:created')
+        this.emitter.emit('hook:beforeCreate')
 
         // 初始化 DOM
         createEditorElement(this)
@@ -140,7 +140,7 @@ class Editor {
         initEvents(this)
         
         // 触发 mounted 生命周期
-        this.emitter.emit('hook:mounted')
+        this.emitter.emit('hook:created')
     }
 
     /**
