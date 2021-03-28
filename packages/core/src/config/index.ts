@@ -5,9 +5,15 @@
 
 import cmd, { ICmd } from './cmd'
 import text, { IText } from './text'
+import menus, { IMenus } from './menus'
 
-export type WangEditorConfig = ICmd & IText
+export type WangEditorConfig = ICmd & IText & IMenus
 
-const config: WangEditorConfig = Object.assign({}, cmd, text)
+const config: WangEditorConfig = Object.assign(
+    {}, 
+    cmd, 
+    text,
+    menus
+)
 
 export default config

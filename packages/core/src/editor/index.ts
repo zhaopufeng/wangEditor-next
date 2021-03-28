@@ -1,7 +1,7 @@
 /**
  * @description 编辑器 class
- * @author wangfupeng
- */
+ * @author tonghan
+*/
 
 import $, { DomElement, DomElementSelector } from '../utils/dom-core'
 import { EMPTY_P } from '../utils/const'
@@ -9,17 +9,19 @@ import config, { WangEditorConfig } from '../config'
 import logger, { TLogger } from '../utils/logger'
 import SelectionAndRangeAPI from '../selection'
 import CommandAPI from '../command'
+import initEvents from '../emitter/initEvent'
 import createEmitter, { Emitter } from '../utils/emitter'
 import createEditorElement from '../element'
 
 // 菜单
-import BtnMenu from '../menus/BtnMenu'
-import DropList from '../menus/DropList'
-import DropListMenu from '../menus/DropListMenu'
-import Panel from '../menus/Panel'
-import PanelMenu from '../menus/PanelMenu'
-import Tooltip from '../menus/Tooltip'
-import initEvents from '../emitter/initEvent'
+import Menu, { MenuListType } from '../menus'
+
+import BtnMenu from '../menus/constructor/BtnMenu'
+import DropList from '../menus/constructor/DropList'
+import DropListMenu from '../menus/constructor/DropListMenu'
+import Panel from '../menus/constructor/Panel'
+import PanelMenu from '../menus/constructor/PanelMenu'
+import Tooltip from '../menus/constructor/Tooltip'
 
 let EDITOR_ID = 1
 
@@ -59,6 +61,26 @@ function initSelection(editor: Editor, newLine: boolean = false) {
     }
 }
 
+/**
+ * 菜单注册
+ * @param { string } key 菜单名称
+ * @param { Function } Menu 菜单的构造函数
+ * @param { string } target 保存的目标
+*/
+function registerMenu(key: string, Menu: FunctionConstructor, target: MenuListType, logger?: TLogger | Console) {
+    logger = logger ? logger : console
+
+    if (!Menu || typeof Menu !== 'function') {
+        throw TypeError('Menu is not function')
+    }
+
+    if(target[key]) {
+        logger.warn('register menu repeat:', key)
+    }
+
+    target[key] = Menu
+}
+
 class Editor {
     // 暴露 $
     static $ = $
@@ -70,6 +92,9 @@ class Editor {
     static PanelMenu = PanelMenu
     static Tooltip = Tooltip
 
+    static globalCustomMenuConstructorList: MenuListType = {}
+    public customMenuConstructorList: MenuListType = {}
+
     public id: string
     public config: WangEditorConfig
     public toolbarSelector: DomElementSelector
@@ -77,10 +102,29 @@ class Editor {
     public $toolbarElem: DomElement
     public $textContainerElem: DomElement
     public $textElem: DomElement
-    public selection: SelectionAndRangeAPI
     public cmd: CommandAPI
+    public selection: SelectionAndRangeAPI
+    public menu: Menu
     public logger: TLogger
     public emitter: Emitter
+
+    /**
+     * 自定义添加菜单 - 全局 - 静态方法
+     * @param { string } key 菜单名称
+     * @param { Function } Menu 菜单的构造函数
+    */
+    static registerMenu(key: string, Menu: any) {
+        registerMenu(key, Menu, Editor.globalCustomMenuConstructorList)
+    }
+
+    /**
+     * 自定义添加菜单 - 实例
+     * @param { string } key 菜单名称
+     * @param { any } Menu 菜单的构造函数
+    */
+    public registerMenu(key: string, Menu: any) {
+        registerMenu(key, Menu, this.customMenuConstructorList, this.logger)
+    }
 
     /**
      * 构造函数
@@ -91,6 +135,7 @@ class Editor {
         // id，用以区分单个页面不同的编辑器对象
         this.id = `wangEditor-${EDITOR_ID++}`
 
+        // 选择器初始化
         this.toolbarSelector = toolbarSelector
         this.textSelector = textSelector
 
@@ -98,19 +143,28 @@ class Editor {
             throw new Error('错误：初始化编辑器时候未传入任何参数，请查阅文档')
         }
 
+        // 配置项初始化
         this.config = config
 
+        // 元素节点初始化
         this.$toolbarElem = $('<div></div>')
         this.$textContainerElem = $('<div></div>')
         this.$textElem = $('<div></div>')
 
+        // 记录器创建
         this.logger = logger()
-        this.emitter = createEmitter()
-        this.cmd = new CommandAPI(this)
-        this.selection = new SelectionAndRangeAPI(this)
 
-        // TODO
-        // 菜单的初始化准备
+        // 发射器创建
+        this.emitter = createEmitter()
+
+        // 命令创建
+        this.cmd = new CommandAPI(this)
+
+        // 选择创建
+        this.selection = new SelectionAndRangeAPI(this)
+        
+        // 菜单创建
+        this.menu = new Menu()
         
         // TODO
         // 插件的初始化准备
@@ -126,8 +180,8 @@ class Editor {
         // 初始化 DOM
         createEditorElement(this)
 
-        // TODO
         // 初始化菜单
+        this.menu.init(this)
 
         // TODO
         // 插件的初始化
