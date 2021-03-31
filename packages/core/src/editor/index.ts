@@ -12,6 +12,7 @@ import CommandAPI from '../command'
 import initEvents from '../emitter/initEvent'
 import createEmitter, { Emitter } from '../utils/emitter'
 import createEditorElement from '../element'
+import Plugin from '../plugin'
 
 // 菜单
 import Menu, { MenuListType } from '../menus'
@@ -27,7 +28,7 @@ let EDITOR_ID = 1
 
 /**
  * 初始化 selector range
-*/
+ */
 function initSelection(editor: Editor, newLine: boolean = false) {
     const $textElem = editor.$textElem
     const $children = $textElem.children()
@@ -107,13 +108,14 @@ class Editor {
     public menu: Menu
     public logger: TLogger
     public emitter: Emitter
+    public plugin: Plugin
 
     /**
      * 自定义添加菜单 - 全局 - 静态方法
      * @param { string } key 菜单名称
      * @param { Function } Menu 菜单的构造函数
     */
-    static registerMenu(key: string, Menu: any) {
+     static registerMenu(key: string, Menu: any) {
         registerMenu(key, Menu, Editor.globalCustomMenuConstructorList)
     }
 
@@ -135,7 +137,6 @@ class Editor {
         // id，用以区分单个页面不同的编辑器对象
         this.id = `wangEditor-${EDITOR_ID++}`
 
-        // 选择器初始化
         this.toolbarSelector = toolbarSelector
         this.textSelector = textSelector
 
@@ -165,9 +166,12 @@ class Editor {
         
         // 菜单创建
         this.menu = new Menu()
-        
-        // TODO
+
         // 插件的初始化准备
+        this.plugin = new Plugin()
+
+        // 注册一个插件
+        // this.plugin.registerPlugin('i18n', i18n)
     }
 
     /**
@@ -185,14 +189,13 @@ class Editor {
 
         // TODO
         // 插件的初始化
-        
 
         // 初始化选区，将光标定位到内容尾部
         initSelection(this)
 
-        // 事件初始化 
+        // 事件初始化
         initEvents(this)
-        
+
         // 触发 mounted 生命周期
         this.emitter.emit('hook:created')
     }
@@ -211,4 +214,3 @@ class Editor {
 }
 
 export default Editor
- 
