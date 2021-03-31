@@ -110,7 +110,7 @@ class Editor {
     this.emitter = createEmitter()
     this.cmd = new CommandAPI(this)
     this.selection = new SelectionAndRangeAPI(this)
-    this.plugin = new Plugin()
+    this.plugin = new Plugin(this)
 
     // TODO
     // 菜单的初始化准备
@@ -118,7 +118,12 @@ class Editor {
     // TODO
     // 插件的初始化准备
     // 注册一个插件
-    // this.plugin.registerPlugin('i18n', i18n)
+    /* register plugin demo
+    this.plugin.registerPlugin('i18n', (editor: Editor, config: any) => {
+      some code
+      return i18n
+    })
+    */
   }
 
   /**
