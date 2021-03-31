@@ -3,14 +3,14 @@
  * @author wangfupeng
  */
 
-import { DomElement } from '../../utils/dom-core'
-import Editor from '../../editor/index'
+import { DomElement } from '../utils/dom-core'
+import Editor from '../editor'
 import Menu from './Menu'
 
 class BtnMenu extends Menu {
-    constructor($elem: DomElement, editor: Editor) {
-        super($elem, editor)
-    }
+  constructor($elem: DomElement, editor: Editor) {
+    super($elem, editor)
+  }
 }
 
 export default BtnMenu

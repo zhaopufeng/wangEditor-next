@@ -6,7 +6,7 @@
 import cmd, { ICmd } from './cmd'
 import text, { IText } from './text'
 
-export type WangEditorConfig = ICmd & IText
+export type WangEditorConfig = ICmd & IText & { [key: string]: any }
 
 const config: WangEditorConfig = Object.assign({}, cmd, text)
 

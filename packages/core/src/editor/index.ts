@@ -12,6 +12,7 @@ import CommandAPI from '../command'
 import createEmitter, { Emitter } from '../utils/emitter'
 import createEditorElement from '../element'
 import Plugin from '../plugin'
+import Menus from '../menus'
 
 // 菜单
 import BtnMenu from '../menus/BtnMenu'
@@ -83,6 +84,7 @@ class Editor {
   public logger: TLogger
   public emitter: Emitter
   public plugin: Plugin
+  public menus: Menus
 
   /**
    * 构造函数
@@ -111,6 +113,7 @@ class Editor {
     this.cmd = new CommandAPI(this)
     this.selection = new SelectionAndRangeAPI(this)
     this.plugin = new Plugin(this)
+    this.menus = new Menus(this)
 
     // TODO
     // 菜单的初始化准备
