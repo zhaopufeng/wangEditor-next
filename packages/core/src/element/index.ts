@@ -1,3 +1,9 @@
+/**
+ * @description element
+ * @author tonghan
+ */
+
+
 import Editor from '../editor';
 import { EMPTY_P } from '../utils/const';
 import { DomElement } from '../utils/dom-core';
@@ -9,6 +15,10 @@ export const styleSettings = {
     toolbarBottomBorder: '1px solid #EEE',
 }
 
+/**
+ * 创建编辑器元素
+ * @param { Editor } editor 编辑器实例
+ */
 export default function createEditorElement (editor: Editor) {
     const $ = Editor.$
 

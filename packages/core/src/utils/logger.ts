@@ -1,17 +1,17 @@
-
-
+/**
+ * @description 记录器
+ * @author tonghan
+ */
 
 type ConsoleKeys = keyof Console
-
 type Levels = { [key in ConsoleKeys]?: number }
-
 type LevelsKeys = keyof Levels
-
 
 /**
  * 记录器
  */
 class Logger {
+    [key: string]: any
     private level: ConsoleKeys = 'warn'
     private levels: Levels = {}
 
@@ -36,9 +36,9 @@ class Logger {
     }
 
     /**
-     * 初始化 leves
+     * 初始化 levels
      */
-    initLeves() {
+    public initLeves(): void {
         this.addLevel('error', 1000)
         this.addLevel('warn', 2000)
         this.addLevel('log', 3000)
@@ -50,11 +50,11 @@ class Logger {
      * @param { LevelsKeys } level
      * @param { any[] } msg
      */
-    log(level: LevelsKeys, ...msg: any[]) {
+    public log(level: LevelsKeys, ...msg: any[]): void {
         const l = this.levels[level]
 
         if(l === undefined) {
-            return new Error(`log Level: ${level} is undefined`)
+            throw new Error(`log Level: ${level} is undefined`)
         }
 
         const baseLevel = this.levels[this.level] || 0
@@ -69,22 +69,26 @@ class Logger {
      * @param { LevelsKeys } level
      * @param { any[] } msg
      */
-    addLevel(level: LevelsKeys, n: number) {
+    public addLevel(level: LevelsKeys, n: number): void {
         this.levels[level] = n
 
-        // if(!this[level]) {
-        //     this[level] = function (...rest: any[]) {
-        //         this.log.apply(this, [level, ...rest])
-        //     }
-        // }
+        if(!this[level]) {
+            this[level] = function (...rest: any[]) {
+                this.log.apply(this, [level, ...rest])
+            }
+        }
     }
 
-    // 获取
-    get baseLevel() {
+    /**
+     * 获取 level
+     */
+    get baseLevel(): ConsoleKeys {
         return this.level
     }
 
-    // 设置
+    /**
+     * 设置 level
+     */
     set baseLevel(level: ConsoleKeys) {
         this.level = level
     }
