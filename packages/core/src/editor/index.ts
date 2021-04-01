@@ -8,7 +8,7 @@ import config, { WangEditorConfig } from '../config'
 import logger, { TLogger } from '../utils/logger'
 import SelectionAndRangeAPI from '../selection'
 import CommandAPI from '../command'
-import initEvents from '../emitter/initEvent'
+import initEvent from '../emitter/initEvent'
 import createEmitter, { Emitter } from '../utils/emitter'
 import createEditorElement from '../element'
 import Plugin from '../plugin'
@@ -168,7 +168,7 @@ class Editor {
         this.selection.rangeToEnd()
 
         // 事件初始化
-        initEvents(this)
+        initEvent(this)
 
         // 触发 mounted 生命周期
         this.emitter.emit('hook:created')
