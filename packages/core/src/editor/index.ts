@@ -26,41 +26,7 @@ import Tooltip from '../menus/constructor/Tooltip'
 
 let EDITOR_ID = 1
 
-/**
- * 初始化 selector range
- */
-function initSelection(editor: Editor, newLine: boolean = false) {
-    const $textElem = editor.$textElem
-    const $children = $textElem.children()
-    if (!$children || !$children.length) {
-        // 如果编辑器区域无内容，添加一个空行，重新设置选区
-        $textElem.append($(EMPTY_P))
-        initSelection(editor)
-        return
-    }
 
-    const $last = $children.last()
-
-    if (newLine) {
-        // 新增一个空行
-        const html = $last.html().toLowerCase()
-        const nodeName = $last.getNodeName()
-        if ((html !== '<br>' && html !== '<br/>') || nodeName !== 'P') {
-            // 最后一个元素不是 空标签，添加一个空行，重新设置选区
-            $textElem.append($(EMPTY_P))
-            initSelection(editor)
-            return
-        }
-    }
-
-    editor.selection.createRangeByElem($last, false, true)
-    if (editor.config.focus) {
-        editor.selection.restoreSelection()
-    } else {
-        // 防止focus=false受其他因素影响
-        editor.selection.clearWindowSelectionRange()
-    }
-}
 
 /**
  * 菜单注册
@@ -190,8 +156,8 @@ class Editor {
         // TODO
         // 插件的初始化
 
-        // 初始化选区，将光标定位到内容尾部
-        initSelection(this)
+        // 将光标定位到编辑区域尾部
+        this.selection.rangeToEnd()
 
         // 事件初始化
         initEvents(this)

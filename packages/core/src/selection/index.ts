@@ -198,6 +198,7 @@ class SelectionAndRange {
             // 部分情况下会报错，兼容一下
         }
     }
+
     /**
      * 重新设置选区
      * @param startDom 选区开始的元素
@@ -216,6 +217,7 @@ class SelectionAndRange {
         //恢复选区
         this.restoreSelection()
     }
+
     /**
      * 根据 DOM 元素设置选区
      * @param $elem DOM 元素
@@ -352,6 +354,45 @@ class SelectionAndRange {
         const range = this.getRange()
         range?.setStart(node, 0)
         range?.setEnd(node, 0)
+    }
+
+    /**
+     * 把 range 设置到末尾
+    */
+    public rangeToEnd(newLine: boolean = false) {
+        const editor = this.editor
+        const $textElem = editor.$textElem
+        const $children = $textElem.children()
+
+        if (!$children || !$children.length) {
+            // 如果编辑器区域无内容，添加一个空行，重新设置选区
+            $textElem.append($(EMPTY_P))
+            this.rangeToEnd()
+            return
+        }
+
+        const $last = $children.last()
+        if (newLine) {
+            // 新增一个空行
+            const html = $last.html().toLowerCase()
+            const nodeName = $last.getNodeName()
+            if ((html !== '<br>' && html !== '<br/>') || nodeName !== 'P') {
+                // 最后一个元素不是 空标签，添加一个空行，重新设置选区
+                $textElem.append($(EMPTY_P))
+                this.rangeToEnd()
+                return
+            }
+        }
+
+        // 创建一个空选区
+        this.createRangeByElem($last, false, true)
+        
+        if (editor.config.focus) {
+            this.restoreSelection()
+        } else {
+            // 防止focus=false受其他因素影响
+            this.clearWindowSelectionRange()
+        }
     }
 }
 
