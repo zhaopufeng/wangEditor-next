@@ -28,7 +28,7 @@ export default function createEditorElement (editor: Editor) {
 
     const height: number = editor.config.height
 
-    let $childrens: DomElement | null
+    let $children: DomElement | null
     
     // 传入了编辑区域的选择器
     if(editor.textSelector) {
@@ -42,7 +42,7 @@ export default function createEditorElement (editor: Editor) {
         const $textSelector: DomElement = $(editor.textSelector)
         
         // 获取编辑区域下的内容
-        $childrens = $textSelector.children()
+        $children = $textSelector.children()
 
         // 把编辑区域容器(自有)填入编辑区域容器(传入)
         $textSelector.append($textContainer)
@@ -54,7 +54,7 @@ export default function createEditorElement (editor: Editor) {
         const $editContainer = $(editor.toolbarSelector)
 
         // 将编辑器容器原有的内容，暂存起来
-        $childrens = $editContainer.children()
+        $children = $editContainer.children()
 
         // 添加工具栏到编辑器容器
         $editContainer.append($toolbar)
@@ -83,9 +83,9 @@ export default function createEditorElement (editor: Editor) {
         .addClass('placeholder')
 
     // 处理编辑区域的内容
-    if($childrens) {
+    if($children) {
         // 当有 childrens 的时候，将 childrens 塞入 编辑区域
-        $text.append($childrens)
+        $text.append($children)
 
         // 隐藏 placeholder
         $placeholder.hide()
@@ -111,9 +111,9 @@ export default function createEditorElement (editor: Editor) {
         .attr('id', getRandom('toolbar-elem'))
 
     // 判断编辑区与容器高度是否一致
-    const textContainerCliheight = $textContainer.getBoundingClientRect().height
+    const textContainerHeight = $textContainer.getBoundingClientRect().height
     const textClientHeight = $text.getBoundingClientRect().height
-    if (textContainerCliheight !== textClientHeight) {
-        $text.css('min-height', textContainerCliheight + 'px')
+    if (textContainerHeight !== textClientHeight) {
+        $text.css('min-height', textContainerHeight + 'px')
     }
 }

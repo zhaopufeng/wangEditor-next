@@ -4,7 +4,6 @@
 */
 
 import $, { DomElement, DomElementSelector } from '../utils/dom-core'
-import { EMPTY_P } from '../utils/const'
 import config, { WangEditorConfig } from '../config'
 import logger, { TLogger } from '../utils/logger'
 import SelectionAndRangeAPI from '../selection'
@@ -13,10 +12,10 @@ import initEvents from '../emitter/initEvent'
 import createEmitter, { Emitter } from '../utils/emitter'
 import createEditorElement from '../element'
 import Plugin from '../plugin'
+import TextHandler from '../text'
 
 // 菜单
 import Menu, { MenuListType } from '../menus'
-
 import BtnMenu from '../menus/constructor/BtnMenu'
 import DropList from '../menus/constructor/DropList'
 import DropListMenu from '../menus/constructor/DropListMenu'
@@ -64,17 +63,23 @@ class Editor {
 
     public id: string
     public config: WangEditorConfig
+
     public toolbarSelector: DomElementSelector
     public textSelector?: DomElementSelector
+
     public $toolbarElem: DomElement
     public $textContainerElem: DomElement
     public $textElem: DomElement
+
     public cmd: CommandAPI
     public selection: SelectionAndRangeAPI
+
+    public txt: TextHandler
     public menu: Menu
+    public plugin: Plugin
+
     public logger: TLogger
     public emitter: Emitter
-    public plugin: Plugin
 
     /**
      * 自定义添加菜单 - 全局 - 静态方法
@@ -132,6 +137,9 @@ class Editor {
         
         // 菜单创建
         this.menu = new Menu()
+
+        // 文本处理 API 创建
+        this.txt = new TextHandler(this)
 
         // 插件的初始化准备
         this.plugin = new Plugin()
