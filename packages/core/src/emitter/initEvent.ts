@@ -1,4 +1,3 @@
-import { EventType } from "mitt";
 import Editor from "../editor";
 import $ from "../utils/dom-core";
 
