@@ -10,6 +10,6 @@ export type Emitter = MittEmitter
  * 创建发射器
  * @returns { Emitter } 发射器
  */
-export default function createEmitter (): Emitter {
-    return mitt()
+export default function createEmitter(): Emitter {
+  return mitt()
 }

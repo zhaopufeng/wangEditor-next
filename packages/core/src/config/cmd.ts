@@ -4,9 +4,9 @@
  */
 
 export interface ICmd {
-    styleWithCSS: boolean
+  styleWithCSS: boolean
 }
 
 export default (function (): ICmd {
-    return { styleWithCSS: false }
+  return { styleWithCSS: false }
 })()

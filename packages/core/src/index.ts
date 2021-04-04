@@ -17,9 +17,9 @@ export * from './menus/'
 
 // 检验是否浏览器环境
 try {
-    document
+  document
 } catch (ex) {
-    throw new Error('请在浏览器环境下运行')
+  throw new Error('请在浏览器环境下运行')
 }
 
 export default Editor

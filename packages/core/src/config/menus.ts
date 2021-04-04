@@ -1,14 +1,11 @@
-
-
 export interface IMenus {
-    menus: string[],
-    excludeMenus: string[]
-
+  menus: string[]
+  excludeMenus: string[]
 }
 
 export default (function (): IMenus {
-    return {
-        menus: [],
-        excludeMenus: []
-    }
+  return {
+    menus: [],
+    excludeMenus: [],
+  }
 })()

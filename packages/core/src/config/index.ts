@@ -9,11 +9,6 @@ import menus, { IMenus } from './menus'
 
 export type WangEditorConfig = ICmd & IText & IMenus
 
-const config: WangEditorConfig = Object.assign(
-    {}, 
-    cmd, 
-    text,
-    menus
-)
+const config: WangEditorConfig = Object.assign({}, cmd, text, menus)
 
 export default config
