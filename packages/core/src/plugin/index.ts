@@ -2,22 +2,29 @@
  * @description 插件管理
  * @author luochao
  */
+import Editor from '../editor'
 
 type PluginTarget = {
   __isPlugin: boolean
   name: string
 }
 
+type PluginFn = {
+  (editor: Editor, config?: any): any
+}
+
 export default class Plugin {
   private plugins: WeakMap<PluginTarget, any>
   private targetMap: Map<string, PluginTarget>
+  public editor: Editor
 
-  constructor() {
+  constructor(editor: Editor) {
     this.plugins = new WeakMap()
     this.targetMap = new Map()
+    this.editor = editor
   }
 
-  public registerPlugin(name: string, plugin: any): void {
+  public registerPlugin(name: string, pluginFn: PluginFn, config?: any): Plugin {
     if (this.hasPlugin(name)) {
       throw new Error('该插件名已使用，请使用其它的名称')
     }
@@ -25,8 +32,10 @@ export default class Plugin {
       __isPlugin: true,
       name,
     }
-    this.plugins.set(pluginTarget, plugin)
+    const pluginRes = pluginFn(this.editor, config)
+    this.plugins.set(pluginTarget, pluginRes)
     this.targetMap.set(name, pluginTarget)
+    return this
   }
 
   public hasPlugin(name: string): boolean {
