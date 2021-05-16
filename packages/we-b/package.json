@@ -1,0 +1,38 @@
+{
+  "name": "we-b",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "luochao <luochao@joyy.sg>",
+  "homepage": "https://github.com/wangeditor-team/wangEditor-next#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangeditor-team/wangEditor-next.git"
+  },
+  "scripts": {
+    "build": "yarn build:lib",
+    "build:lib": "../../node_modules/.bin/rollup -c rollup.config.js"
+  },
+  "bugs": {
+    "url": "https://github.com/wangeditor-team/wangEditor-next/issues"
+  },
+  "dependencies": {
+    "crypto-es": "^1.2.7",
+    "crypto-js": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.0.1"
+  }
+}

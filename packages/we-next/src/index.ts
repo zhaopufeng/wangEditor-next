@@ -1,3 +1,7 @@
-export default function weNext() {
-  console.log('hello we-next')
+import encrypt from 'we-a'
+import decrypt from 'we-b'
+
+export default {
+  encrypt,
+  decrypt,
 }
